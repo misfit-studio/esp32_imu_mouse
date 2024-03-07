@@ -16,7 +16,7 @@
 #include "utils.h"
 #include "quat_math.h"
 
-#define BTN_DEBOUNCE_TIME 50
+#define BTN_DEBOUNCE_TIME 30
 #define DATA_REPEAT_INTERVAL 500
 #define MOVEMENT_TIMEOUT 5 * 60 * 1000 // 5 minutes
 
@@ -178,6 +178,7 @@ void send_data()
 void send_ack()
 {
   send_message(ACK, nullptr, 0);
+  serial_rx_window_time = 0; // We're done with commands, start sending data again
 }
 
 /* -------------------------- MAIN LOOP -------------------------- */
